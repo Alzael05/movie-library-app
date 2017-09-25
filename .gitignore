@@ -29,7 +29,7 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 *.sublime-project
 
 # php_gen_file
-.phpintel/
+.phpintel
 
 # NPM
-node_modules/
+node_modules
