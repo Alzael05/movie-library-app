@@ -27,3 +27,9 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 *.stTheme.cache
 *.sublime-workspace
 *.sublime-project
+
+# php_gen_file
+.phpintel/
+
+# NPM
+node_modules/
