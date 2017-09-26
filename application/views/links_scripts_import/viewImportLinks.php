@@ -28,6 +28,6 @@
 <script>
 	window.base_url = '<?php echo base_url(); ?>';
 	window.wss_url  = '<?php echo preg_replace( '/(http:\/\/)|(https:\/\/)/i', 'wss://', base_url() ) ?>';
-
+	window.__token =  { <?php echo $this->security->get_csrf_token_name(); ?> : '<?php echo $this->security->get_csrf_hash(); ?>'};
 </script>
 <!-- custom -->

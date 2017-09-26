@@ -1,21 +1,13 @@
 
-		var base_url = '<?php echo base_url(); ?>';
-		var wss_url  = '<?php echo preg_replace( '/(http:\/\/)|(https:\/\/)/i', 'wss://', base_url() ) ?>';
-		( function(  ) {
 
+		( function( $ ) {
 			"use strict";
-
-			console.log( '<?php echo session_name().':'.session_id(); ?>' );
 
 			$.ajaxSetup(
 						{
 							type: 		'POST',
 							dataType: 	'JSON',
-							data: 		{
-											<?php echo $this->security->get_csrf_token_name(); ?>
-											:
-											'<?php echo $this->security->get_csrf_hash(); ?>'
-										},
+							data: 		window.__token,
 
 							success: 	function( response, textStatus, jqXHR )
 										{
@@ -113,4 +105,4 @@
 						5000
 					);
 
-		} )();
+		} )( jQuery );
