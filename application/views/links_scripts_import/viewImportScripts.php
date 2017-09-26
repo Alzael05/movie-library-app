@@ -2,7 +2,7 @@
 
 
 <!-- jquery -->
-	<!-- <script type="text/javascript" src="<?php echo base_url().'assets/js/prep/jquery-3.2.1.js'; ?> "></script> -->
+	<!-- <script type="text/javascript" src="<?php echo base_url().'resources/js/old_src/prep/jquery-3.2.1.js'; ?> "></script> -->
 	<!-- <script type="text/javascript" src="<?php echo base_url().'assets/js/prep/jquery-ui.js'; ?> "></script> -->
 <!-- jquery -->
 
@@ -41,6 +41,7 @@
 <!-- custom js -->
 	<script>
 
+/*
 		( function() {
 			"use strict";
 
@@ -154,6 +155,7 @@
 					);
 
 		} )();
+*/
 
 	</script>
 	<script  type="text/javascript" src="<?php echo base_url().'assets/bundle/js/app.build.js'; ?> "></script>
