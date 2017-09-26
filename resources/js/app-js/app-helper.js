@@ -1,6 +1,6 @@
-"use strict";
 
 		var app_helper = ( function() {
+		"use strict";
 
 				function flash_notify  ( type, message ) {
 					$.notify( {

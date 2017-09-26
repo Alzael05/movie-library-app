@@ -19,7 +19,7 @@
 		}
 	}*/
 
-	export function announce() {
+	function announce() {
 		"use strict";
 
 		var announcent_toolbars = [

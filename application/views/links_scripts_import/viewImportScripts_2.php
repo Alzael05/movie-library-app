@@ -2,50 +2,48 @@
 
 
 <!-- jquery -->
-	<!-- <script type="text/javascript" src="<?php echo base_url().'assets/js/prep/jquery-3.2.1.js'; ?> "></script> -->
-	<!-- <script type="text/javascript" src="<?php echo base_url().'assets/js/prep/jquery-ui.js'; ?> "></script> -->
+	<script type="text/javascript" src="<?php echo base_url().'assets/js/prep/jquery-3.2.1.js'; ?> "></script>
+	<script type="text/javascript" src="<?php echo base_url().'assets/js/prep/jquery-ui.js'; ?> "></script>
 <!-- jquery -->
 
 <!-- moment -->
-	<!-- <script type="text/javascript" src="<?php echo base_url().'assets/js/prep/moment.js'; ?> "></script> -->
-	<!-- <script type="text/javascript" src="<?php echo base_url().'assets/js/prep/moment-with-locales.js'; ?> "></script> -->
+	<script type="text/javascript" src="<?php echo base_url().'assets/js/prep/moment.js'; ?> "></script>
+	<script type="text/javascript" src="<?php echo base_url().'assets/js/prep/moment-with-locales.js'; ?> "></script>
 <!-- moment -->
 
 <!-- easy ui -->
-	<!-- <script  type="text/javascript" src="<?php echo base_url().'assets/easyui/jquery.min.js'; ?> "></script> -->
-	<!-- <script  type="text/javascript" src="<?php echo base_url().'assets/easyui/jquery.easyui.min.js'; ?> "></script> -->
-	<!-- <script  type="text/javascript" src="<?php echo base_url().'assets/easyui/jquery.edatagrid.js'; ?> "></script> -->
-	<!-- <script  type="text/javascript" src="<?php echo base_url().'assets/easyui/easyloader.js'; ?> "></script> -->
+	<script  type="text/javascript" src="<?php echo base_url().'assets/easyui/jquery.min.js'; ?> "></script>
+	<script  type="text/javascript" src="<?php echo base_url().'assets/easyui/jquery.easyui.min.js'; ?> "></script>
+	<script  type="text/javascript" src="<?php echo base_url().'assets/easyui/jquery.edatagrid.js'; ?> "></script>
+	<script  type="text/javascript" src="<?php echo base_url().'assets/easyui/easyloader.js'; ?> "></script>
 
 	<!-- txt editor -->
-	<!-- <script  type="text/javascript" src="<?php echo base_url().'assets/js/texteditor/jquery.texteditor.js'; ?> "></script> -->
+	<script  type="text/javascript" src="<?php echo base_url().'assets/js/texteditor/jquery.texteditor.js'; ?> "></script>
 	<!-- txt editor -->
 
 <!-- easy ui -->
 
 <!-- jquery validation -->
-	<!-- <script type="text/javascript" src="<?php echo base_url().'assets/js/jquery-validation/dist/jquery.validate.js'; ?> "></script> -->
-	<!-- <script type="text/javascript" src="<?php echo base_url().'assets/js/jquery-validation/dist/additional-methods.js'; ?> "></script> -->
+	<script type="text/javascript" src="<?php echo base_url().'assets/js/jquery-validation/dist/jquery.validate.js'; ?> "></script>
+	<script type="text/javascript" src="<?php echo base_url().'assets/js/jquery-validation/dist/additional-methods.js'; ?> "></script>
 <!-- jquery validation -->
 
 <!-- boostrap -->
-	<!-- <script  type="text/javascript" src="<?php echo base_url().'assets/js/bootstrap/popper.js'; ?> "></script> -->
-	<!-- <script  type="text/javascript" src="<?php echo base_url().'assets/js/bootstrap/bootstrap.js'; ?> "></script> -->
+	<script  type="text/javascript" src="<?php echo base_url().'assets/js/bootstrap/popper.js'; ?> "></script>
+	<script  type="text/javascript" src="<?php echo base_url().'assets/js/bootstrap/bootstrap.js'; ?> "></script>
 	<!-- <script  type="text/javascript" src="<?php echo base_url().'assets/js/bootstrap/npm.js"></scri'; ?> pt> -->
-	<!-- <script  type="text/javascript" src="<?php echo base_url().'assets/js/bootstrap/bootstrap-notify.js'; ?> "></script> -->
+	<script  type="text/javascript" src="<?php echo base_url().'assets/js/bootstrap/bootstrap-notify.js'; ?> "></script>
 <!-- boostrap -->
-	<script  type="text/javascript" src="<?php echo base_url().'assets/bundle/js/vendor.build.js'; ?> "></script>
-	<script  type="text/javascript" src="<?php echo base_url().'assets/bundle/js/plugins.build.js'; ?> "></script>
 
 
 <!-- custom js -->
 	<script>
-
-		( function() {
-			"use strict";
+		"use strict";
+		var base_url = '<?php echo base_url(); ?>';
+		var wss_url  = '<?php echo preg_replace( '/(http:\/\/)|(https:\/\/)/i', 'wss://', base_url() ) ?>';
+		( function(  ) {
 
 			console.log( '<?php echo session_name().':'.session_id(); ?>' );
-			console.log( '<?php echo $this->security->get_csrf_token_name().':'.$this->security->get_csrf_hash(); ?>' );
 
 			$.ajaxSetup(
 						{
@@ -156,25 +154,23 @@
 		} )();
 
 	</script>
-	<script  type="text/javascript" src="<?php echo base_url().'assets/bundle/js/app.build.js'; ?> "></script>
+	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/app_js/design-tweks.js"></script>
 
-	<!-- <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/app_js/design-tweks.js"></script> -->
-
-	<!-- <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/app_js/app-helper.js"></script> -->
+	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/app_js/app-helper.js"></script>
 
 	<!-- <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/app_js/event-handlers.js"></script> -->
 
-	<!-- <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/app_js/easyui-configs.js"></script> -->
+	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/app_js/easyui-configs.js"></script>
 	<!-- <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/app_js/easyui-datagrid-configs.js"></script> -->
 
 	<!-- <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/app_js/app.js"></script> -->
 
 
-	<!-- <script type="text/javascript" src="<?php echo base_url(); ?>assets/bundle/announ.build.js"></script> -->
+	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/app_js/announcement.js"></script>
 	<!-- <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/app_js/session-checker.js"></script> -->
 
 	<!-- <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/sample.js"></script> -->
-	<!-- <script type="text/javascript" src="<?php echo base_url(); ?>assets/bundle/login.js"></script> -->
+	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/login-module/login.js"></script>
 
 <!-- custom js -->
 
