@@ -1,98 +1,98 @@
 
-		var app_helper = ( function() {
-		"use strict";
+		// export function app_helper() {
+			"use strict";
 
-				function flash_notify  ( type, message ) {
-					$.notify( {
-								message: message
-							  },
-							  {
-							  	type: 		type,
-								placement: 	{
-									align: "center",
-								},
-								timer: 		5000//30000//
-							  } );
-				};
+			export function flash_notify  ( type, message ) {
+				console.log( $.fn );
+				$.notify( {
+							message: message
+						  },
+						  {
+						  	type: 		type,
+							placement: 	{
+								align: "center",
+							},
+							timer: 		5000//30000//
+						  } );
+			};
 
-				function is_empty ( obj ) {
-					if ( typeof obj !== 'undefined' ) {
-						return Object.keys( obj ).length === 0;
+			export function is_empty ( obj ) {
+				if ( typeof obj !== 'undefined' ) {
+					return Object.keys( obj ).length === 0;
+				}
+				else {
+					return false;
+				}
+			};
+
+			export function crud ( path, datas ) {
+				var t_r;
+
+				$.ajax( {
+					url: 		base_url + path,
+					data: 		datas.row,
+					type: 		'POST',
+					dataType: 	'JSON',
+					success: 	function ( response_data, textStatus, jqXHR ) {
+						flash_notify( response_data.type, response_data.message );
+						t_r = true;
 					}
-					else {
-						return false;
-					}
-				};
+				} );
 
-				function crud ( path, datas ) {
-					var t_r;
+				return t_r;
+			};
 
-					$.ajax( {
-						url: 		base_url + path,
-						data: 		datas.row,
-						type: 		'POST',
-						dataType: 	'JSON',
-						success: 	function ( response_data, textStatus, jqXHR ) {
-							flash_notify( response_data.type, response_data.message );
-							t_r = true;
-						}
-					} );
+			export function remove_edit ( mdlId ) {
+				var $modal      = $( mdlId );
+				var $form       = $modal.find( 'form' );
+				var $edit_input = $modal.find( 'input[data-edit="edit"]' );
 
-					return t_r;
-				};
+				$form.find( 'input:text, textarea' ).val( '' );
+				$form.find( 'div.texteditor-body' ).text( '' );
+				$form.find( ':checkbox' ).removeAttr( 'checked' );
 
-				function remove_edit ( mdlId ) {
-					var $modal 			= $( mdlId );
-					var $form 			= $modal.find( 'form' );
-					var $edit_input 	= $modal.find( 'input[data-edit="edit"]' );
+				$edit_input.remove();
+			};
 
-					$form.find( 'input:text, textarea' ).val( '' );
-					$form.find( 'div.texteditor-body' ).text( '' );
-					$form.find( ':checkbox' ).removeAttr( 'checked' );
+			export function bind_remove_script_event () {
+				var $input_elements = $( 'input:text, textarea' );
 
-					$edit_input.remove();
-				};
+				$input_elements.on( 'blur change',
+									function ( event ) {
+										console.log( $( this ).val() );
+										var temp_value = $( this ).val();
+										$( this ).val( _check_script_tags( temp_value ) );
+									} );
 
-				function bind_remove_script_event () {
-					var $input_elements = $( 'input:text, textarea' );
+				var $div_txt_editor = $( 'div.texteditor-body' );
 
-					$input_elements.on( 'blur change',
-										function ( event ) {
-											console.log( $( this ).val() );
-											var temp_value = $( this ).val();
-											$( this ).val( check_script_tags( temp_value ) );
-										} );
+				$div_txt_editor.on( 'blur change',
+									function ( event ) {
+										console.log( $( this ).text() );
+										var temp_value = $( this ).text();
+										$( this ).text( _check_script_tags( temp_value ) );
+									} );
+			};
 
-					var $div_txt_editor = $( 'div.texteditor-body' );
+			function _check_script_tags ( value ) {
+				var pattern = /(<script[^>]*>)(\D*?)(<\/script>)|<script>|<\/script>/ig;
 
-					$div_txt_editor.on( 'blur change',
-										function ( event ) {
-											console.log( $( this ).text() );
-											var temp_value = $( this ).text();
-											$( this ).text( check_script_tags( temp_value ) );
-										} );
-				};
+				if ( pattern.test( value )  ) {
+					var new_value = value.replace( pattern, '' );
+				}
+				else {
+					var new_value = value;
+				}
 
-				function check_script_tags ( value ) {
-					var pattern = /(<script[^>]*>)(\D*?)(<\/script>)|<script>|<\/script>/ig;
+				return new_value;
+			};
 
-					if ( pattern.test( value )  ) {
-						var new_value = value.replace( pattern, '' );
-					}
-					else {
-						var new_value = value;
-					}
-
-					return new_value;
-				};
-
-				return	{
-							crud: crud,
-							flash_notify: flash_notify,
-							is_empty: is_empty,
-							remove_edit: remove_edit,
-							// check_script_tags	: check_script_tags,s
-							bind_remove_script_event: bind_remove_script_event,
-						};
-
-		} )();
+			/*return	{
+				crud: crud,
+				flash_notify: flash_notify,
+				is_empty: is_empty,
+				remove_edit: remove_edit,
+				// _check_script_tags	: check_script_tags,s
+				bind_remove_script_event: bind_remove_script_event,
+			};*/
+		// }

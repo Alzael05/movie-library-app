@@ -4,7 +4,8 @@
   "description": "What is CodeIgniter ###################",
   "main": "webpack.config.js",
   "scripts": {
-    "build": "webpack --colors --env.production=0"
+    "build": "webpack --colors --env.production=0",
+    "watch": "webpack --colors --env.production=0 --watch"
   },
   "keywords": [],
   "author": "azael",
