@@ -18,8 +18,9 @@
 
 		}
 	}*/
+	import { is_empty, crud } from './app-helper';
 
-	function announce() {
+	window.announce = ( function () {
 		"use strict";
 
 		var announcent_toolbars = [
@@ -188,8 +189,8 @@
 
 							announcements.crud_type = 'delete';
 
-							if ( ! app_helper.is_empty( announcements.datas.changes ) ) {
-								var t_r = app_helper.crud(
+							if ( ! is_empty( announcements.datas.changes ) ) {
+								var t_r = crud(
 									announcements.ctrl_url + announcements.crud_type + '/ajax',
 									announcements.datas
 								);
@@ -360,8 +361,8 @@
 							changes,
 						};
 
-						if ( ! app_helper.is_empty( announcements.datas.changes ) ) {
-							var t_r = app_helper.crud(
+						if ( ! is_empty( announcements.datas.changes ) ) {
+							var t_r = crud(
 								announcements.ctrl_url + announcements.crud_type + '/ajax',
 								announcements.datas
 							);
@@ -422,5 +423,6 @@
 			edit_row: 	actions.edit_row,
 			delete_row: actions.delete_row,
 		}
-	};
+	} )();
+
 //# sourceURL=https://announcements-app

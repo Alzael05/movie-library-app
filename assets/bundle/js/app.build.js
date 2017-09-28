@@ -1520,21 +1520,18 @@ return be;
 /***/ "4WUx":
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
 /* WEBPACK VAR INJECTION */(function($) {
 
-	$( function () {
-		"use strict";
+$(function () {
+	"use strict";
 
-		var nua 		= navigator.userAgent
-		var isAndroid 	= (	nua.indexOf( 'Mozilla/5.0' ) > -1 &&
-	                 		nua.indexOf( 'Android ' ) > -1 &&
-	                 		nua.indexOf( 'AppleWebKit' ) > -1 &&
-	                 		nua.indexOf( 'Chrome' ) === -1 )
-		if ( isAndroid ) {
-			$( 'select.form-control' ).removeClass( 'form-control' ).css( 'width', '100%' )
-		}
-	} )
-
+	var nua = navigator.userAgent;
+	var isAndroid = nua.indexOf('Mozilla/5.0') > -1 && nua.indexOf('Android ') > -1 && nua.indexOf('AppleWebKit') > -1 && nua.indexOf('Chrome') === -1;
+	if (isAndroid) {
+		$('select.form-control').removeClass('form-control').css('width', '100%');
+	}
+});
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("7t+N")))
 
 /***/ }),
@@ -4123,115 +4120,89 @@ return hyAm;
 /***/ "J+0J":
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
 /* WEBPACK VAR INJECTION */(function(jQuery) {
 
-		( function( $ ) {
-			"use strict";
+var _appHelper = __webpack_require__("ziQw");
 
-			$.ajaxSetup(
-						{
-							type: 		'POST',
-							dataType: 	'JSON',
-							data: 		window.__token,
+(function ($) {
+	"use strict";
 
-							success: 	function( response, textStatus, jqXHR )
-										{
-											console.log( 'success' );
-										},
+	$.ajaxSetup({
+		type: 'POST',
+		dataType: 'JSON',
+		data: window.__token,
 
-							error: 		function( jqXHR, textStatus, errorThrown ) {
+		success: function success(response, textStatus, jqXHR) {
+			console.log('success');
+		},
+		error: function error(jqXHR, textStatus, errorThrown) {
 
-											console.log( jqXHR );
-											console.log( jqXHR.responseJSON );
-											// console.log( jqXHR.responseText );
-											console.log( textStatus );
-											console.log( errorThrown );
+			console.log(jqXHR);
+			console.log(jqXHR.responseJSON);
+			// console.log( jqXHR.responseText );
+			console.log(textStatus);
+			console.log(errorThrown);
 
-											// t_r = false;
-											switch( jqXHR.status )
-											{
+			// t_r = false;
+			switch (jqXHR.status) {
 
-												case 200:
-													console.log( jqXHR.status );
-													app_helper.flash_notify(
-										                        			jqXHR.responseJSON.type,
-										                        			jqXHR.responseJSON.message
-											                        	);
-													// alert( 'ERROR!!! ' + textStatus );
-													break;
+				case 200:
+					console.log(jqXHR.status);
+					(0, _appHelper.flash_notify)(jqXHR.responseJSON.type, jqXHR.responseJSON.message);
+					// alert( 'ERROR!!! ' + textStatus );
+					break;
 
-												case 400:
-													// alert( 'ERROR ' + jqXHR.status + '!!! ' + textStatus );
-													app_helper.flash_notify(
-										                        			jqXHR.responseJSON.type,
-										                        			jqXHR.responseJSON.message
-											                        	);
-													break;
+				case 400:
+					// alert( 'ERROR ' + jqXHR.status + '!!! ' + textStatus );
+					(0, _appHelper.flash_notify)(jqXHR.responseJSON.type, jqXHR.responseJSON.message);
+					break;
 
-												case 401:
-													// alert( textStatus );
-													console.log('Love');
-													if ( typeof  jqXHR.responseJSON.message !== 'undefined' )
-													{
-														$.messager.alert(
-																			'Notice',
-																			jqXHR.responseJSON.message,//'Ssion timeout!',
-																			'error',
-																			function () {
-																				window.location = jqXHR.responseJSON.redirect;//jqXHR.index;
-																			}
-																		);
-													}
-													// $.messager.alert(
-													// 					'Notice',
-													// 					'Session timeout!',
-													// 					'warning',
-													// 					function() {
-													// 						window.location = base_url + '/index' ;//jqXHR.index;
-													// 					}
-													// 				);
+				case 401:
+					// alert( textStatus );
+					console.log('Love');
+					if (typeof jqXHR.responseJSON.message !== 'undefined') {
+						$.messager.alert('Notice', jqXHR.responseJSON.message, //'Ssion timeout!',
+						'error', function () {
+							window.location = jqXHR.responseJSON.redirect; //jqXHR.index;
+						});
+					}
+					// $.messager.alert(
+					// 					'Notice',
+					// 					'Session timeout!',
+					// 					'warning',
+					// 					function() {
+					// 						window.location = base_url + '/index' ;//jqXHR.index;
+					// 					}
+					// 				);
 
-													break;
+					break;
 
-												case 403:
-													app_helper.flash_notify(
-										                        			'danger',
-										                        			'ERROR!!! ' + ( jqXHR.statusText || textStatus ) + ', Please contact your admin'
-											                        	);
-													break;
+				case 403:
+					(0, _appHelper.flash_notify)('danger', 'ERROR!!! ' + (jqXHR.statusText || textStatus) + ', Please contact your admin');
+					break;
 
-												default:
-													app_helper.flash_notify(
-										                        			'danger',
-										                        			'ERROR!!! ' + textStatus + ', Please contact your admin'
-											                        	);
-													// alert(  );
-													// alert( 'ERROR!!! ' );
+				default:
+					(0, _appHelper.flash_notify)('danger', 'ERROR!!! ' + textStatus + ', Please contact your admin');
+				// alert(  );
+				// alert( 'ERROR!!! ' );
 
-											}
-											// return false;
-										},
+			}
+			// return false;
+		}
 
-							// complete: 	function( event, xhr, options )
-							// 			{
-							// 				console.log( 'complete' );
-							// 			},
-						}
-					);
+		// complete: 	function( event, xhr, options )
+		// 			{
+		// 				console.log( 'complete' );
+		// 			},
+	});
 
-			setTimeout(
-						function() {
-
-							var $notif_message 	= $( '#notif_message' );
-							var $notif_close 	= $notif_message.find( ':button' );
-							$notif_close.click();
-
-						},
-						5000
-					);
-
-		} )( jQuery );
-
+	setTimeout(function () {
+		var $notif_message = $('#notif_message');
+		var $notif_close = $notif_message.find(':button');
+		$notif_close.click();
+	}, 5000);
+})(jQuery);
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("7t+N")))
 
 /***/ }),
@@ -4328,433 +4299,391 @@ return jv;
 /***/ "Koak":
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
 /* WEBPACK VAR INJECTION */(function($) {
-	/*import 'easyui-configs';
 
-	class Announcement {
-		constructor() {
+var _appHelper = __webpack_require__("ziQw");
 
+window.announce = function () {
+	"use strict";
+
+	var announcent_toolbars = [{
+		iconCls: 'icon-add',
+		handler: function handler() {
+			actions.add_row();
 		}
-
-		function init() {
-
+	}, '-', '-', {
+		iconCls: 'icon-undo',
+		handler: function handler() {
+			actions.cancel_row();
 		}
+	}];
 
-		function bind_events () {
-
-		}
-
-		function render () {
-
-		}
-	}*/
-
-	function announce() {
-		"use strict";
-
-		var announcent_toolbars = [
-			{
-				iconCls: 'icon-add',
-				handler: function() {
-					actions.add_row();
-				}
-			},
-			'-',
-			'-',
-			{
-				iconCls: 'icon-undo',
-				handler: function() {
-					actions.cancel_row();
-				}
-			},
-		];
-
-		var announcement_columns = 	[
-			{
-				field: 		'intAnnouncementId',
-				title: 		'Id',
-				sortable: 	true,
-				align: 		'center',
-				hidden: 	true,
-			},
-			{
-				field: 		'dtmAnnouncementDate',
-				title: 		'Date',
-				sortable: 	true,
-				editor: 	{
-								type: 	'datetimebox',
-								options:{
-											required: true
-										},
-							},
-			},
-			{
-				field: 		'strAnnouncementTitle',
-				title: 		'Title',
-				width: 		100,
-				sortable: 	true,
-				editor: 	{
-								type: 	'validatebox',
-								options:{
-											required: true
-										}
-							}
-			},
-			{
-				field: 		'txtAnnouncementDescription',
-				title: 		'Description',
-				width: 		300,
-				editor: 	{
-								type: 	'textarea',
-								options:{
-											required: 	true
-										}
-							}
-			},
-			{
-				field: 		'blnIsSpecial',
-				title: 		'Special',
-				width: 		50,
-				align: 		'center',
-				editor: 	{
-								type: 		'checkbox',
-								options:	{
-												on: 	1,
-												off: 	0
-											}
-							},
-				formatter: 	function ( value, row, index ) {
-								if ( value == 1 ) {
-									return 'S';
-								}
-								else {
-									return 'NS';
-								}
-							}
-			},
-			{
-				field: 		'blnIsUrgent',
-				title: 		'Urgent',
-				width: 		50,
-				align: 		'center',
-				editor: 	{
-								type: 		'checkbox',
-								options:	{
-												on: 	1,
-												off: 	0
-											}
-							},
-				formatter: 	function ( value, row, index ) {
-								if ( value == 1 ) {
-									return 'U';
-								}
-								else {
-									return 'NU';
-								}
-
-							}
-			},
-		];
-
-		var actions = {
-			add_row: function () {
-				if ( this.save_row() ) {
-					announcements.crud_type = 'create';
-
-					announcements.$tbl_element.datagrid(
-											'appendRow',
-											{
-												index: 	0,
-												row: 	{}
-											}
-										);
-
-					var add_index = announcements.$tbl_element.datagrid( 'getRows' ).length - 1;
-
-					// console.log( announcements.add_index );
-
-					announcements.$tbl_element.datagrid( 'selectRow', add_index )
-												.datagrid( 'beginEdit', add_index );
-				}
-			},
-			cancel_row: function ( index ) {
-				// announcements.edit_index = undefined;
-				announcements.$tbl_element.datagrid( 'cancelEdit', index );
-			},
-			save_row: function ( index ) {
-				if ( announcements.edit_index == undefined ) { return true; }
-
-				if ( announcements.$tbl_element.datagrid( 'validateRow', index ) ) {
-					announcements.$tbl_element.datagrid( 'endEdit', index );
-					return true;
-				} else {
-					announcements.edit_index = undefined;
-					return false;
-				}
-			},
-			edit_row: function ( index ) {
-				if ( announcements.edit_index != undefined ) {
-					this.cancel_row();
-				}
-				// announcements.edit_index = get_row_index( target );
-				announcements.$tbl_element.datagrid( 'refreshRow', index );
-
-				if ( this.save_row( index ) ) {
-					announcements.crud_type = 'update';
-					announcements.$tbl_element.datagrid( 'beginEdit', index );
-											//.datagrid( 'selectRow', announcements.edit_index )
-				} else {
-					announcements.$tbl_element.datagrid( 'selectRow', index );
-				}
-				// app_helper.bind_remove_script_event();
-			},
-			delete_row: function ( index ) {
-				$.messager.confirm(
-					'Delete',
-					'Are you sure you want to delete the record ?',
-					function( r ) {
-						if ( r ) {
-							// if ( announcements.edit_index == undefined ){ return }
-
-							announcements.crud_type = 'delete';
-
-							if ( ! app_helper.is_empty( announcements.datas.changes ) ) {
-								var t_r = app_helper.crud(
-									announcements.ctrl_url + announcements.crud_type + '/ajax',
-									announcements.datas
-								);
-
-								announcements.$tbl_element.datagrid( 'cancelEdit', 	index )
-														  .datagrid( 'deleteRow', index );
-
-								// announcements.$tbl_element.datagrid( 'refreshRow', announcements.edit_index );
-								announcements.$tbl_element.datagrid( 'reload' );
-
-								// announcements.edit_index = undefined;
-							}
-						}
-					}
-				);
-			},
-			trigger_modal: function ( row ) {
-				var $form = announcements.$mdl_element.find( 'form' );
-				var $edit_input = announcements.$mdl_element.find( 'input[data-edit="edit"]' );
-
-				var id = Object.keys( row )[ 0 ];
-
-				$edit_input.remove();
-				$form.attr( 'action', announcements.ctrl_url + 'update' );
-				$form.append( '<input type="hidden" id="'+id+'" name="'+id+'" data-edit="edit" />' );
-
-				$.each( row,
-						function( key, val ) {
-							var $input_textarea  = $form.find( 'input#'+key+' , textarea[name="'+key+'"]' );
-							var $chk_box         = $form.find( ':checkbox#'+key+'[value="'+val+'"]' );
-							var $dtm_box         = $form.find( 'input#'+key+'.date' );
-							var $div_text_editor = $form.find( 'div#'+key );
-							// console.log();
-							$input_textarea.val( val );
-
-							if ( val == 1 ) {
-								$chk_box.prop( 'checked', 'true' );
-							}
-							else if ( val == 0 ) {
-								$chk_box.removeAttr( 'checked' );
-							}
-							// console.log( $form.find( ':checkbox#'+key+'[value="'+val+'"]' ) 	 )
-							$dtm_box.datetimebox( { value: val } );
-							$div_text_editor.text( val );
-						} );
-
-				announcements.$mdl_element.modal();
+	var announcement_columns = [{
+		field: 'intAnnouncementId',
+		title: 'Id',
+		sortable: true,
+		align: 'center',
+		hidden: true
+	}, {
+		field: 'dtmAnnouncementDate',
+		title: 'Date',
+		sortable: true,
+		editor: {
+			type: 'datetimebox',
+			options: {
+				required: true
 			}
 		}
-
-		var announcements = {
-			datas: {},
-			crud_type: undefined,
-			edit_index: undefined,
-			_init: function () {
-				this.ctrl_url = 'announcements/';
-
-				this._cache_dom();
-				this._render();
-				this._init_datagrid();
-			},
-			_cache_dom: function () {
-				this.$tbl_element = $( '#tblAnnncmnts' );
-
-				this.$mdl_element = $( '#mdlForm' );
-				this.$dtm_box     = $( '#dtmAnnouncementDate' );
-				this.$txt_editor  = $( '#txtAnnouncementDescription' );
-			},
-			_bind_events: function () {
-
-			},
-			_render: function () {
-				this.$dtm_box.datetimebox();
-				this.$txt_editor.texteditor(
-					{
-						name: 'txtAnnouncementDescription',
-					}
-				);
-			},
-			_init_datagrid: function () {
-				this.$tbl_element.datagrid( {
-					url: base_url + announcements.ctrl_url + 'retrieve',
-					method: 'POST',
-					striped: true,
-					fitColumns: true,
-					pagination: true,
-					rownumbers: true,
-					singleSelect: true,
-					emptyMsg: 'No records available.',
-					// idField: 		'strAnnouncementId',
-					toolbar: announcent_toolbars,
-					columns: [ announcement_columns.concat( [
-								{
-									field: 		'strUpdatedById',
-									title: 		'Updated by ',
-									sortable: 	true,
-									align: 		'center',
-									formatter: 	function ( value, row, index ) {
-													return row.updatedBy;
-												}
-								},
-								{
-									field: 		'dtmDateUpdated',
-									title: 		'Date Updated',
-									sortable: 	true,
-								},
-								{
-									field: 		'strInsertedById',
-									title: 		'Posted by',
-									sortable: 	true,
-									align: 		'center',
-									formatter: 	function ( value, row, index ) {
-													return row.insertedBy;
-												}
-								},
-								{
-									field: 		'dtmDateInserted',
-									title: 		'Date Posted',
-									sortable: 	true,
-								},
-								{
-									field: 		'action',
-									title: 		'Action',
-									// width: 		60,
-									align: 		'center',
-									formatter: 	function ( value, row, index ) {
-													if ( announcements.edit_index != undefined ) {
-														var save_row   = '<a href="javascript:void( 0 )" onclick="announce.save_row( '+index+' )">Save</a> 	';
-														var cancel_row = '<a href="javascript:void( 0 )" onclick="announce.cancel_row( '+index+' )">Cancel</a>	';
-
-														return save_row + cancel_row;
-													} else {
-														var edit_row   = '<a href="javascript:void( 0 )" onclick="announce.edit_row( '+index+' )">Edit</a> 	';
-														var delete_row = '<a href="javascript:void( 0 )" onclick="announce.delete_row( '+index+' )">Delete</a>	';
-
-														return edit_row + delete_row;
-													}
-												}
-								}
-					] ) ],
-					onLoadSuccess: function () {
-						announcements.edit_index = undefined;
-						$( this ).datagrid( 'resize' );
-					},
-					onClickRow: function ( index, row ) { //onSelect
-						// console.log(index)
-						announcements.datas = {
-							row
-						};
-					},
-					onDblClickRow: function ( index, row ) {
-						if ( row[ 'intAnnouncementId' ] != undefined ) {
-							actions.trigger_modal( row );
-						}
-					},
-					onBeforeEdit: function ( index, row ) {
-						announcements.edit_index = index;
-						$( this ).datagrid( 'unselectAll' )
-								 .datagrid( 'refreshRow', index );
-								 // .datagrid( 'selectRow', index )
-					},
-					// onBeginEdit: function ( index, row ) {
-					// },
-					onEndEdit: function ( index, row, changes ) {
-						row.editing = false;
-						announcements.datas = {
-							row,
-							changes,
-						};
-
-						if ( ! app_helper.is_empty( announcements.datas.changes ) ) {
-							var t_r = app_helper.crud(
-								announcements.ctrl_url + announcements.crud_type + '/ajax',
-								announcements.datas
-							);
-						}
-						$( this ).datagrid( 'refreshRow', index );
-
-						announcements.edit_index = undefined;
-					},
-					onAfterEdit: function ( index, row ) {
-						announcements.edit_index = undefined;
-						$( this ).datagrid( 'reload' );
-					},
-					onCancelEdit: function ( index, row ) {
-						announcements.edit_index = undefined;
-						$( this ).datagrid( 'refreshRow', index );
-					}
-				} );
-				// return 	this.$tbl_element;
+	}, {
+		field: 'strAnnouncementTitle',
+		title: 'Title',
+		width: 100,
+		sortable: true,
+		editor: {
+			type: 'validatebox',
+			options: {
+				required: true
 			}
 		}
+	}, {
+		field: 'txtAnnouncementDescription',
+		title: 'Description',
+		width: 300,
+		editor: {
+			type: 'textarea',
+			options: {
+				required: true
+			}
+		}
+	}, {
+		field: 'blnIsSpecial',
+		title: 'Special',
+		width: 50,
+		align: 'center',
+		editor: {
+			type: 'checkbox',
+			options: {
+				on: 1,
+				off: 0
+			}
+		},
+		formatter: function formatter(value, row, index) {
+			if (value == 1) {
+				return 'S';
+			} else {
+				return 'NS';
+			}
+		}
+	}, {
+		field: 'blnIsUrgent',
+		title: 'Urgent',
+		width: 50,
+		align: 'center',
+		editor: {
+			type: 'checkbox',
+			options: {
+				on: 1,
+				off: 0
+			}
+		},
+		formatter: function formatter(value, row, index) {
+			if (value == 1) {
+				return 'U';
+			} else {
+				return 'NU';
+			}
+		}
+	}];
 
-					// function get_row_index ( target ) {
+	var actions = {
+		add_row: function add_row() {
+			if (this.save_row()) {
+				announcements.crud_type = 'create';
 
-					// 	var tr = $( target ).closest( 'tr.datagrid-row' );
-					// 	return parseInt( tr.attr( 'datagrid-row-index' ) );
+				announcements.$tbl_element.datagrid('appendRow', {
+					index: 0,
+					row: {}
+				});
 
-					// };
+				var add_index = announcements.$tbl_element.datagrid('getRows').length - 1;
 
+				// console.log( announcements.add_index );
 
-			// function get_main_table( target )
-			// {
-			// 	var tr = $( target ).find( 'table[class="datagrid-f"]' );
-			// 	return tr;
-			// 	// return parseInt( tr.attr( 'datagrid-row-index' ) );
-			// }
-
-		announcements._init();
-		/*(
-			function() {
-
-				$( '#mdlForm' ).on(
-									'hidden.bs.modal',
-									function( event ) {
-
-										// console.log('May');
-										app_helper.remove_edit( this );
-
-									}
-								);
-
-				app_helper.bind_remove_script_event();
+				announcements.$tbl_element.datagrid('selectRow', add_index).datagrid('beginEdit', add_index);
+			}
+		},
+		cancel_row: function cancel_row(index) {
+			// announcements.edit_index = undefined;
+			announcements.$tbl_element.datagrid('cancelEdit', index);
+		},
+		save_row: function save_row(index) {
+			if (announcements.edit_index == undefined) {
+				return true;
 			}
 
-		)();*/
-		return {
-			save_row: 	actions.save_row,
-			cancel_row: actions.cancel_row,
-			edit_row: 	actions.edit_row,
-			delete_row: actions.delete_row,
+			if (announcements.$tbl_element.datagrid('validateRow', index)) {
+				announcements.$tbl_element.datagrid('endEdit', index);
+				return true;
+			} else {
+				announcements.edit_index = undefined;
+				return false;
+			}
+		},
+		edit_row: function edit_row(index) {
+			if (announcements.edit_index != undefined) {
+				this.cancel_row();
+			}
+			// announcements.edit_index = get_row_index( target );
+			announcements.$tbl_element.datagrid('refreshRow', index);
+
+			if (this.save_row(index)) {
+				announcements.crud_type = 'update';
+				announcements.$tbl_element.datagrid('beginEdit', index);
+				//.datagrid( 'selectRow', announcements.edit_index )
+			} else {
+				announcements.$tbl_element.datagrid('selectRow', index);
+			}
+			// app_helper.bind_remove_script_event();
+		},
+		delete_row: function delete_row(index) {
+			$.messager.confirm('Delete', 'Are you sure you want to delete the record ?', function (r) {
+				if (r) {
+					// if ( announcements.edit_index == undefined ){ return }
+
+					announcements.crud_type = 'delete';
+
+					if (!(0, _appHelper.is_empty)(announcements.datas.changes)) {
+						var t_r = (0, _appHelper.crud)(announcements.ctrl_url + announcements.crud_type + '/ajax', announcements.datas);
+
+						announcements.$tbl_element.datagrid('cancelEdit', index).datagrid('deleteRow', index);
+
+						// announcements.$tbl_element.datagrid( 'refreshRow', announcements.edit_index );
+						announcements.$tbl_element.datagrid('reload');
+
+						// announcements.edit_index = undefined;
+					}
+				}
+			});
+		},
+		trigger_modal: function trigger_modal(row) {
+			var $form = announcements.$mdl_element.find('form');
+			var $edit_input = announcements.$mdl_element.find('input[data-edit="edit"]');
+
+			var id = Object.keys(row)[0];
+
+			$edit_input.remove();
+			$form.attr('action', announcements.ctrl_url + 'update');
+			$form.append('<input type="hidden" id="' + id + '" name="' + id + '" data-edit="edit" />');
+
+			$.each(row, function (key, val) {
+				var $input_textarea = $form.find('input#' + key + ' , textarea[name="' + key + '"]');
+				var $chk_box = $form.find(':checkbox#' + key + '[value="' + val + '"]');
+				var $dtm_box = $form.find('input#' + key + '.date');
+				var $div_text_editor = $form.find('div#' + key);
+				// console.log();
+				$input_textarea.val(val);
+
+				if (val == 1) {
+					$chk_box.prop('checked', 'true');
+				} else if (val == 0) {
+					$chk_box.removeAttr('checked');
+				}
+				// console.log( $form.find( ':checkbox#'+key+'[value="'+val+'"]' ) 	 )
+				$dtm_box.datetimebox({ value: val });
+				$div_text_editor.text(val);
+			});
+
+			announcements.$mdl_element.modal();
 		}
 	};
+
+	var announcements = {
+		datas: {},
+		crud_type: undefined,
+		edit_index: undefined,
+		_init: function _init() {
+			this.ctrl_url = 'announcements/';
+
+			this._cache_dom();
+			this._render();
+			this._init_datagrid();
+		},
+		_cache_dom: function _cache_dom() {
+			this.$tbl_element = $('#tblAnnncmnts');
+
+			this.$mdl_element = $('#mdlForm');
+			this.$dtm_box = $('#dtmAnnouncementDate');
+			this.$txt_editor = $('#txtAnnouncementDescription');
+		},
+		_bind_events: function _bind_events() {},
+		_render: function _render() {
+			this.$dtm_box.datetimebox();
+			this.$txt_editor.texteditor({
+				name: 'txtAnnouncementDescription'
+			});
+		},
+		_init_datagrid: function _init_datagrid() {
+			this.$tbl_element.datagrid({
+				url: base_url + announcements.ctrl_url + 'retrieve',
+				method: 'POST',
+				striped: true,
+				fitColumns: true,
+				pagination: true,
+				rownumbers: true,
+				singleSelect: true,
+				emptyMsg: 'No records available.',
+				// idField: 		'strAnnouncementId',
+				toolbar: announcent_toolbars,
+				columns: [announcement_columns.concat([{
+					field: 'strUpdatedById',
+					title: 'Updated by ',
+					sortable: true,
+					align: 'center',
+					formatter: function formatter(value, row, index) {
+						return row.updatedBy;
+					}
+				}, {
+					field: 'dtmDateUpdated',
+					title: 'Date Updated',
+					sortable: true
+				}, {
+					field: 'strInsertedById',
+					title: 'Posted by',
+					sortable: true,
+					align: 'center',
+					formatter: function formatter(value, row, index) {
+						return row.insertedBy;
+					}
+				}, {
+					field: 'dtmDateInserted',
+					title: 'Date Posted',
+					sortable: true
+				}, {
+					field: 'action',
+					title: 'Action',
+					// width: 		60,
+					align: 'center',
+					formatter: function formatter(value, row, index) {
+						if (announcements.edit_index != undefined) {
+							var save_row = '<a href="javascript:void( 0 )" onclick="announce.save_row( ' + index + ' )">Save</a> 	';
+							var cancel_row = '<a href="javascript:void( 0 )" onclick="announce.cancel_row( ' + index + ' )">Cancel</a>	';
+
+							return save_row + cancel_row;
+						} else {
+							var edit_row = '<a href="javascript:void( 0 )" onclick="announce.edit_row( ' + index + ' )">Edit</a> 	';
+							var delete_row = '<a href="javascript:void( 0 )" onclick="announce.delete_row( ' + index + ' )">Delete</a>	';
+
+							return edit_row + delete_row;
+						}
+					}
+				}])],
+				onLoadSuccess: function onLoadSuccess() {
+					announcements.edit_index = undefined;
+					$(this).datagrid('resize');
+				},
+				onClickRow: function onClickRow(index, row) {
+					//onSelect
+					// console.log(index)
+					announcements.datas = {
+						row: row
+					};
+				},
+				onDblClickRow: function onDblClickRow(index, row) {
+					if (row['intAnnouncementId'] != undefined) {
+						actions.trigger_modal(row);
+					}
+				},
+				onBeforeEdit: function onBeforeEdit(index, row) {
+					announcements.edit_index = index;
+					$(this).datagrid('unselectAll').datagrid('refreshRow', index);
+					// .datagrid( 'selectRow', index )
+				},
+				// onBeginEdit: function ( index, row ) {
+				// },
+				onEndEdit: function onEndEdit(index, row, changes) {
+					row.editing = false;
+					announcements.datas = {
+						row: row,
+						changes: changes
+					};
+
+					if (!(0, _appHelper.is_empty)(announcements.datas.changes)) {
+						var t_r = (0, _appHelper.crud)(announcements.ctrl_url + announcements.crud_type + '/ajax', announcements.datas);
+					}
+					$(this).datagrid('refreshRow', index);
+
+					announcements.edit_index = undefined;
+				},
+				onAfterEdit: function onAfterEdit(index, row) {
+					announcements.edit_index = undefined;
+					$(this).datagrid('reload');
+				},
+				onCancelEdit: function onCancelEdit(index, row) {
+					announcements.edit_index = undefined;
+					$(this).datagrid('refreshRow', index);
+				}
+			});
+			// return 	this.$tbl_element;
+		}
+
+		// function get_row_index ( target ) {
+
+		// 	var tr = $( target ).closest( 'tr.datagrid-row' );
+		// 	return parseInt( tr.attr( 'datagrid-row-index' ) );
+
+		// };
+
+
+		// function get_main_table( target )
+		// {
+		// 	var tr = $( target ).find( 'table[class="datagrid-f"]' );
+		// 	return tr;
+		// 	// return parseInt( tr.attr( 'datagrid-row-index' ) );
+		// }
+
+	};announcements._init();
+	/*(
+ 	function() {
+ 				$( '#mdlForm' ).on(
+ 							'hidden.bs.modal',
+ 							function( event ) {
+ 										// console.log('May');
+ 								app_helper.remove_edit( this );
+ 									}
+ 						);
+ 				app_helper.bind_remove_script_event();
+ 	}
+ 		)();*/
+	return {
+		save_row: actions.save_row,
+		cancel_row: actions.cancel_row,
+		edit_row: actions.edit_row,
+		delete_row: actions.delete_row
+	};
+}();
+
 //# sourceURL=https://announcements-app
 
+/*import 'easyui-configs';
+
+class Announcement {
+	constructor() {
+
+	}
+
+	function init() {
+
+	}
+
+	function bind_events () {
+
+	}
+
+	function render () {
+
+	}
+}*/
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("7t+N")))
 
 /***/ }),
@@ -11732,50 +11661,50 @@ return bs;
 /***/ "b6fw":
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
 /* WEBPACK VAR INJECTION */(function(jQuery, $, moment) {
-	( function ( $, DateTimeBox_defaults ) {
-		"use strict";
 
-		$.extend( $.fn.datagrid.defaults.editors, {
-			textarea: {
-				init: function ( container, options ) {
-					var input = $( '<textarea type="textarea" class="form-control datagrid-editable-input">' ).appendTo( container );
-					return input;
-				},
-				destroy: function ( target ) {
-					$( target ).remove();
-				},
-				getValue: function ( target ) {
-					return $( target ).val();
-				},
-				setValue: function ( target, value ) {
-					$( target ).val( value );
-				},
-				resize: function ( target, width ) {
-					$( target )._outerWidth( width );
-				}
+(function ($, DateTimeBox_defaults) {
+	"use strict";
+
+	$.extend($.fn.datagrid.defaults.editors, {
+		textarea: {
+			init: function init(container, options) {
+				var input = $('<textarea type="textarea" class="form-control datagrid-editable-input">').appendTo(container);
+				return input;
+			},
+			destroy: function destroy(target) {
+				$(target).remove();
+			},
+			getValue: function getValue(target) {
+				return $(target).val();
+			},
+			setValue: function setValue(target, value) {
+				$(target).val(value);
+			},
+			resize: function resize(target, width) {
+				$(target)._outerWidth(width);
 			}
-		} );
+		}
+	});
 
-		DateTimeBox_defaults.required 	= 	true;
-		DateTimeBox_defaults.width 		= 	350;
-		// DateTimeBox_defaults.panelWidth 	= 	300;
+	DateTimeBox_defaults.required = true;
+	DateTimeBox_defaults.width = 350;
+	// DateTimeBox_defaults.panelWidth 	= 	300;
 
-		DateTimeBox_defaults.formatter	= 	function ( date ) {
-			var m_date = moment( date ).format( 'YYYY-MM-DD HH:mm:ss' );
-			return m_date;
-		};
+	DateTimeBox_defaults.formatter = function (date) {
+		var m_date = moment(date).format('YYYY-MM-DD HH:mm:ss');
+		return m_date;
+	};
 
-		DateTimeBox_defaults.parser 	=	function ( value ) {
-			if ( $.trim( value ) == "" ) {
-				return new Date();
-			}
-			return new Date( value );
-		};
-
-	} )( jQuery, $.fn.datetimebox.defaults );
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("7t+N"), __webpack_require__("7t+N"), __webpack_require__("PJh5")["default"]))
+	DateTimeBox_defaults.parser = function (value) {
+		if ($.trim(value) == "") {
+			return new Date();
+		}
+		return new Date(value);
+	};
+})(jQuery, $.fn.datetimebox.defaults);
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("7t+N"), __webpack_require__("7t+N"), __webpack_require__("PJh5")))
 
 /***/ }),
 
@@ -12597,72 +12526,67 @@ return sd;
 /***/ "fZN5":
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
 /* WEBPACK VAR INJECTION */(function($) {
 
-( function () {
+(function () {
 
-		var login = /*function () (*/{
+	var login = /*function () (*/{
 
-			init: function () {
-				this.cache_dom();
-				this.bind_events();
-				this.render();
-			},
-			cache_dom: function () {
-				// body...
-				this.$form 				= $( 'form' );
-				this.url 				= this.$form.attr( 'action' );
+		init: function init() {
+			this.cache_dom();
+			this.bind_events();
+			this.render();
+		},
+		cache_dom: function cache_dom() {
+			// body...
+			this.$form = $('form');
+			this.url = this.$form.attr('action');
 
-				this.$el_txt_user_name	= $( '#txtUsername' );
-				this.$el_txt_password	= $( '#txtPassword' );
-				this.$el_btn_login		= $( '#btnLogin' 	);
-			},
-			bind_events: function () {
+			this.$el_txt_user_name = $('#txtUsername');
+			this.$el_txt_password = $('#txtPassword');
+			this.$el_btn_login = $('#btnLogin');
+		},
+		bind_events: function bind_events() {
 			// event handlers
-				this.$el_btn_login.on( 'click', this.submit_login.bind( this ) );
+			this.$el_btn_login.on('click', this.submit_login.bind(this));
 			// event handlers
-			},
-			render: function () {
+		},
+		render: function render() {},
+		submit_login: function submit_login(event) {
+			event.preventDefault();
 
-			},
-			submit_login: function ( event ) {
-				event.preventDefault();
+			var val_user_name = this.$el_txt_user_name.val();
+			var val_password = this.$el_txt_password.val();
 
-				var val_user_name	= this.$el_txt_user_name.val();
-				var val_password	= this.$el_txt_password.val();
-
-				$.ajax( {
-					url: 		base_url + 'index/login',
-					type: 		'POST',
-					dataType: 	'JSON',
-					data: 		{
-									txtUserName : val_user_name,
-									txtPassword : val_password
-					},
-					// success: 	function ( response, textStatus, jqXHR ) {
-					// 				// app_helper.flash_notify( response.type, response.message );
-					// 				if ( response.type == 'redirect' )
-					// 				{
-					// 					console.log(response);
-					// 					window.location.assign( response.message ) ;
-					// 				}
-					// }
-				} ).done( function ( response, textStatus, jqXHR ) {
-					if ( response.type == 'redirect' ) {
-						console.log(response);
-						window.location.assign( response.message ) ;
-					}
-				} );
-				// app_helper.check_script_tags( val_user_name );
-			}
-
+			$.ajax({
+				url: base_url + 'index/login',
+				type: 'POST',
+				dataType: 'JSON',
+				data: {
+					txtUserName: val_user_name,
+					txtPassword: val_password
+				}
+				// success: 	function ( response, textStatus, jqXHR ) {
+				// 				// app_helper.flash_notify( response.type, response.message );
+				// 				if ( response.type == 'redirect' )
+				// 				{
+				// 					console.log(response);
+				// 					window.location.assign( response.message ) ;
+				// 				}
+				// }
+			}).done(function (response, textStatus, jqXHR) {
+				if (response.type == 'redirect') {
+					console.log(response);
+					window.location.assign(response.message);
+				}
+			});
+			// app_helper.check_script_tags( val_user_name );
 		}
-		/*)*/;
+		/*)*/ };
 
 	login.init();
-
-} ) ();
-
+})();
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("7t+N")))
 
 /***/ }),
@@ -16659,105 +16583,108 @@ return lb;
 /***/ "ziQw":
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
 /* WEBPACK VAR INJECTION */(function($) {
-		var app_helper = ( function() {
-		"use strict";
+// export function app_helper() {
 
-				function flash_notify  ( type, message ) {
-					$.notify( {
-								message: message
-							  },
-							  {
-							  	type: 		type,
-								placement: 	{
-									align: "center",
-								},
-								timer: 		5000//30000//
-							  } );
-				};
 
-				function is_empty ( obj ) {
-					if ( typeof obj !== 'undefined' ) {
-						return Object.keys( obj ).length === 0;
-					}
-					else {
-						return false;
-					}
-				};
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.flash_notify = flash_notify;
+exports.is_empty = is_empty;
+exports.crud = crud;
+exports.remove_edit = remove_edit;
+exports.bind_remove_script_event = bind_remove_script_event;
+function flash_notify(type, message) {
+	console.log($.fn);
+	$.notify({
+		message: message
+	}, {
+		type: type,
+		placement: {
+			align: "center"
+		},
+		timer: 5000 //30000//
+	});
+};
 
-				function crud ( path, datas ) {
-					var t_r;
+function is_empty(obj) {
+	if (typeof obj !== 'undefined') {
+		return Object.keys(obj).length === 0;
+	} else {
+		return false;
+	}
+};
 
-					$.ajax( {
-						url: 		base_url + path,
-						data: 		datas.row,
-						type: 		'POST',
-						dataType: 	'JSON',
-						success: 	function ( response_data, textStatus, jqXHR ) {
-							flash_notify( response_data.type, response_data.message );
-							t_r = true;
-						}
-					} );
+function crud(path, datas) {
+	var t_r;
 
-					return t_r;
-				};
+	$.ajax({
+		url: base_url + path,
+		data: datas.row,
+		type: 'POST',
+		dataType: 'JSON',
+		success: function success(response_data, textStatus, jqXHR) {
+			flash_notify(response_data.type, response_data.message);
+			t_r = true;
+		}
+	});
 
-				function remove_edit ( mdlId ) {
-					var $modal 			= $( mdlId );
-					var $form 			= $modal.find( 'form' );
-					var $edit_input 	= $modal.find( 'input[data-edit="edit"]' );
+	return t_r;
+};
 
-					$form.find( 'input:text, textarea' ).val( '' );
-					$form.find( 'div.texteditor-body' ).text( '' );
-					$form.find( ':checkbox' ).removeAttr( 'checked' );
+function remove_edit(mdlId) {
+	var $modal = $(mdlId);
+	var $form = $modal.find('form');
+	var $edit_input = $modal.find('input[data-edit="edit"]');
 
-					$edit_input.remove();
-				};
+	$form.find('input:text, textarea').val('');
+	$form.find('div.texteditor-body').text('');
+	$form.find(':checkbox').removeAttr('checked');
 
-				function bind_remove_script_event () {
-					var $input_elements = $( 'input:text, textarea' );
+	$edit_input.remove();
+};
 
-					$input_elements.on( 'blur change',
-										function ( event ) {
-											console.log( $( this ).val() );
-											var temp_value = $( this ).val();
-											$( this ).val( check_script_tags( temp_value ) );
-										} );
+function bind_remove_script_event() {
+	var $input_elements = $('input:text, textarea');
 
-					var $div_txt_editor = $( 'div.texteditor-body' );
+	$input_elements.on('blur change', function (event) {
+		console.log($(this).val());
+		var temp_value = $(this).val();
+		$(this).val(_check_script_tags(temp_value));
+	});
 
-					$div_txt_editor.on( 'blur change',
-										function ( event ) {
-											console.log( $( this ).text() );
-											var temp_value = $( this ).text();
-											$( this ).text( check_script_tags( temp_value ) );
-										} );
-				};
+	var $div_txt_editor = $('div.texteditor-body');
 
-				function check_script_tags ( value ) {
-					var pattern = /(<script[^>]*>)(\D*?)(<\/script>)|<script>|<\/script>/ig;
+	$div_txt_editor.on('blur change', function (event) {
+		console.log($(this).text());
+		var temp_value = $(this).text();
+		$(this).text(_check_script_tags(temp_value));
+	});
+};
 
-					if ( pattern.test( value )  ) {
-						var new_value = value.replace( pattern, '' );
-					}
-					else {
-						var new_value = value;
-					}
+function _check_script_tags(value) {
+	var pattern = /(<script[^>]*>)(\D*?)(<\/script>)|<script>|<\/script>/ig;
 
-					return new_value;
-				};
+	if (pattern.test(value)) {
+		var new_value = value.replace(pattern, '');
+	} else {
+		var new_value = value;
+	}
 
-				return	{
-							crud: crud,
-							flash_notify: flash_notify,
-							is_empty: is_empty,
-							remove_edit: remove_edit,
-							// check_script_tags	: check_script_tags,s
-							bind_remove_script_event: bind_remove_script_event,
-						};
+	return new_value;
+};
 
-		} )();
-
+/*return	{
+	crud: crud,
+	flash_notify: flash_notify,
+	is_empty: is_empty,
+	remove_edit: remove_edit,
+	// _check_script_tags	: check_script_tags,s
+	bind_remove_script_event: bind_remove_script_event,
+};*/
+// }
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("7t+N")))
 
 /***/ })

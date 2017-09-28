@@ -1,6 +1,6 @@
 
 
-( function () {
+	( function () {
 
 		var login = /*function () (*/{
 
@@ -60,6 +60,7 @@
 		}
 		/*)*/;
 
-	login.init();
+		login.init();
 
-} ) ();
+	} ) ();
+

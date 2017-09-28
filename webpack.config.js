@@ -38,14 +38,15 @@ module.exports = function (env) {
 				'jquery',
 				'popper.js',
 				'tooltip.js',
-				'easyui/jquery.easyui.min.js',
-				'res_js/texteditor/jquery.texteditor.js',
 			],
 			plugins: [
 				'bootstrap',
 				'jquery-validation',
 				'moment',
+				'easyui/jquery.easyui.min.js',
 
+				'res_js/app-js/bootstrap-notify.js',
+				'res_js/texteditor/jquery.texteditor.js',
 			],
 			'style_app': [
 				'bootstrap/dist/css/bootstrap.css',
@@ -92,13 +93,23 @@ module.exports = function (env) {
 		output: {
 			filename: `[name].${prefix}.js`,
 			path: path.resolve(__dirname, 'assets/bundle/js'),
-			publicPath: '/assets/js/'
+			publicPath: '/assets/bundle'
 		},
 
 		devtool: env.production ? 'nosources-source-map' : 'cheap-module-source-map',
 
 		module: {
 			rules: [
+				{
+					test: /\.js$/,
+					exclude: /(node_modules|bower_components)/,
+					use: {
+						loader: 'babel-loader',
+						options: {
+							presets: ['env'],
+						}
+					}
+				},
 				{
 					test: /\.css$/,
 					use: ExtractTextPlugin.extract({
@@ -117,6 +128,7 @@ module.exports = function (env) {
 					use: [{
 						loader: 'file-loader',
 						options: {
+							// context: path.resolve(__dirname, "resources/fonts"),
 							name: '[name].[ext]',
 							outputPath: '../font/'
 						}
@@ -127,6 +139,7 @@ module.exports = function (env) {
 					use: [{
 						loader: 'file-loader',
 						options: {
+							// context: path.resolve(__dirname, "resources/images"),
 							name: '[name].[ext]',
 							outputPath: '../image/'
 						}
@@ -150,9 +163,12 @@ module.exports = function (env) {
 				$: 'jquery',
 				jQuery: 'jquery',
 				'window.jQuery': 'jquery',
-				Popper: ['popper.js', 'default'],
-				Tooltip: ['tooltip.js', 'default'],
-				moment: ['moment', 'default'],
+
+				Popper: 'popper.js',
+				Tooltip: 'tooltip.js',
+
+				'moment': 'moment',
+				// 'window.moment': 'moment',
 			}),
 			new ExtractTextPlugin({
 				filename: function (getPath) {
